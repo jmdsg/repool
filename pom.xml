@@ -31,15 +31,33 @@
     <!-- Properties -->
     <properties>
 
+        <!-- Autoservice -->
         <auto-service.version>1.0-rc2</auto-service.version>
 
+        <!-- Javapoet -->
+        <java-poet.version>1.9.0</java-poet.version>
+
+        <!-- Apache Commons -->
+        <commons.version>3.6</commons.version>
+        <commons-text.version>1.1</commons-text.version>
+        <commons-io.version>2.5</commons-io.version>
+
+        <!-- Guava -->
+        <guava.version>23.0</guava.version>
+
+        <!-- Jetbrains Annotations -->
+        <jetbrains-annotations.version>15.0</jetbrains-annotations.version>
+
+        <!-- Plugins -->
         <plugin-compiler.version>3.7.0</plugin-compiler.version>
         <plugin.toolchain.version>1.1</plugin.toolchain.version>
         <plugin-javadoc.version>3.0.0</plugin-javadoc.version>
         <plugin-install.version>2.5.2</plugin-install.version>
         <plugin-sources.version>3.0.1</plugin-sources.version>
         <plugin.jar.version>3.0.2</plugin.jar.version>
+        <plugin-notnull-instrumenter.version>0.6.6</plugin-notnull-instrumenter.version>
 
+        <!-- Project settings -->
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -55,6 +73,37 @@
             <artifactId>auto-service</artifactId>
             <version>${auto-service.version}</version>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- Javapoet -->
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>javapoet</artifactId>
+            <version>${java-poet.version}</version>
+        </dependency>
+
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${commons-text.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
     </dependencies>
@@ -141,6 +190,38 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+            </plugin>
+
+            <!-- Notnull instrumenter plugin -->
+            <plugin>
+                <groupId>se.eris</groupId>
+                <artifactId>notnull-instrumenter-maven-plugin</artifactId>
+                <version>${plugin-notnull-instrumenter.version}</version>
+                <executions>
+                    <execution>
+                        <id>instrument</id>
+                        <goals>
+                            <goal>instrument</goal>
+                            <goal>tests-instrument</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <implicit>false</implicit>
+                    <notNull>
+                        <param>javax.annotation.Nonnull</param>
+                    </notNull>
+                    <nullable>
+                        <param>javax.annotation.Nullable</param>
+                    </nullable>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains</groupId>
+                        <artifactId>annotations</artifactId>
+                        <version>${jetbrains-annotations.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
         </plugins>

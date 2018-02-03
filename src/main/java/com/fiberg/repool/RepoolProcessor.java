@@ -3,6 +3,7 @@ package com.fiberg.repool;
 import com.fiberg.repool.annotation.Repool;
 import com.google.auto.service.AutoService;
 
+import javax.annotation.Nonnull;
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
@@ -23,7 +24,7 @@ public class RepoolProcessor extends AbstractProcessor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public synchronized void init(final ProcessingEnvironment processingEnv) {
+	public synchronized void init(@Nonnull final ProcessingEnvironment processingEnv) {
 		super.init(processingEnv);
 		this.filer = processingEnv.getFiler();
 		this.messager = processingEnv.getMessager();
@@ -33,8 +34,8 @@ public class RepoolProcessor extends AbstractProcessor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean process(final java.util.Set<? extends TypeElement> annotations,
-	                       final RoundEnvironment roundEnv) {
+	public boolean process(@Nonnull final java.util.Set<? extends TypeElement> annotations,
+	                       @Nonnull final RoundEnvironment roundEnv) {
 
 
 		return false;
@@ -45,6 +46,7 @@ public class RepoolProcessor extends AbstractProcessor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Nonnull
 	@Override
 	public java.util.Set<String> getSupportedAnnotationTypes() {
 		final java.util.Set<String> annotataions = new java.util.LinkedHashSet<>();
@@ -55,6 +57,7 @@ public class RepoolProcessor extends AbstractProcessor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Nonnull
 	@Override
 	public SourceVersion getSupportedSourceVersion() {
 		return SourceVersion.latestSupported();
