@@ -9,12 +9,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 /**
  * Util class with utility methods to join namesm suffixes and prefixes.
  */
-public final class Utils {
+public final class NameUtils {
 
 	/**
 	 * Private empty constructor.
 	 */
-	private Utils() {  }
+	private NameUtils() {  }
 
 	/** Java name separator */
 	public static final String NAME_SEPARATOR = ".";

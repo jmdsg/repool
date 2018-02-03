@@ -1,11 +1,16 @@
 package com.fiberg.repool;
 
 import com.fiberg.repool.annotation.Repool;
+import com.fiberg.repool.processor.Generator;
+import com.fiberg.repool.processor.Utils;
 import com.google.auto.service.AutoService;
+import com.squareup.javapoet.TypeSpec;
 
 import javax.annotation.Nonnull;
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 
 /**
@@ -14,11 +19,11 @@ import javax.lang.model.element.TypeElement;
 @AutoService(Processor.class)
 public class RepoolProcessor extends AbstractProcessor {
 
-	/** Filer to create java classes */
-	private Filer filer;
-
 	/** Messager to print annotation processor errors */
 	private Messager messager;
+
+	/** Filer to create java classes */
+	private Filer filer;
 
 	/**
 	 * {@inheritDoc}
@@ -26,8 +31,8 @@ public class RepoolProcessor extends AbstractProcessor {
 	@Override
 	public synchronized void init(@Nonnull final ProcessingEnvironment processingEnv) {
 		super.init(processingEnv);
-		this.filer = processingEnv.getFiler();
 		this.messager = processingEnv.getMessager();
+		this.filer = processingEnv.getFiler();
 	}
 
 	/**
@@ -38,7 +43,26 @@ public class RepoolProcessor extends AbstractProcessor {
 	                       @Nonnull final RoundEnvironment roundEnv) {
 
 
-		return false;
+
+		Generator generator = new Generator(messager, filer);
+
+		java.util.Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(Repool.class);
+
+		elements.stream()
+				.filter(TypeElement.class::isInstance)
+				.map(TypeElement.class::cast)
+				.forEach(type -> {
+
+					String simpleName = type.getSimpleName().toString();
+					PackageElement packageElement = Utils.extractPackage(type);
+					String packageName = packageElement.getQualifiedName().toString();
+					generator.createJavaClass(TypeSpec.interfaceBuilder(String.format("%sRPL", simpleName))
+									.build(), packageName, simpleName);
+
+				});
+
+		return true;
+
 
 
 	}

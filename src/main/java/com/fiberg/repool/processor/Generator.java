@@ -1,6 +1,6 @@
 package com.fiberg.repool.processor;
 
-import com.fiberg.repool.util.Utils;
+import com.fiberg.repool.util.NameUtils;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 
@@ -51,7 +51,7 @@ public class Generator {
 			try {
 
 				// create source file and open the writer
-				final JavaFileObject jfo = filer.createSourceFile(Utils.addPrefixName(className, packageName));
+				final JavaFileObject jfo = filer.createSourceFile(NameUtils.addPrefixName(className, packageName));
 				final Writer writer = jfo.openWriter();
 
 				// build the class and write to the file
