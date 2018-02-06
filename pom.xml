@@ -55,7 +55,7 @@
         <plugin-install.version>2.5.2</plugin-install.version>
         <plugin-sources.version>3.0.1</plugin-sources.version>
         <plugin.jar.version>3.0.2</plugin.jar.version>
-        <plugin-notnull-instrumenter.version>0.6.6</plugin-notnull-instrumenter.version>
+        <plugin-nonnull-instrumenter.version>0.6.6</plugin-nonnull-instrumenter.version>
 
         <!-- Project settings -->
         <java.version>1.8</java.version>
@@ -196,7 +196,7 @@
             <plugin>
                 <groupId>se.eris</groupId>
                 <artifactId>notnull-instrumenter-maven-plugin</artifactId>
-                <version>${plugin-notnull-instrumenter.version}</version>
+                <version>${plugin-nonnull-instrumenter.version}</version>
                 <executions>
                     <execution>
                         <id>instrument</id>

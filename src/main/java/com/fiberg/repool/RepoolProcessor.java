@@ -54,10 +54,11 @@ public class RepoolProcessor extends AbstractProcessor {
 				.forEach(type -> {
 
 					String simpleName = type.getSimpleName().toString();
+					String generatedName = String.format("%sRPL", simpleName);
 					PackageElement packageElement = Utils.extractPackage(type);
 					String packageName = packageElement.getQualifiedName().toString();
-					generator.createJavaClass(TypeSpec.interfaceBuilder(String.format("%sRPL", simpleName))
-									.build(), packageName, simpleName);
+					generator.createJavaClass(TypeSpec.interfaceBuilder(generatedName)
+									.build(), packageName, generatedName);
 
 				});
 
