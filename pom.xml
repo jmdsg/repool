@@ -45,6 +45,9 @@
         <!-- Guava -->
         <guava.version>23.0</guava.version>
 
+        <!-- Fiberg Common -->
+        <fiberg-common.version>1.0.0-SNAPSHOT</fiberg-common.version>
+
         <!-- Jetbrains Annotations -->
         <jetbrains-annotations.version>15.0</jetbrains-annotations.version>
 
@@ -104,6 +107,13 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+
+        <!-- Fiberg Common -->
+        <dependency>
+            <groupId>com.fiberg</groupId>
+            <artifactId>common</artifactId>
+            <version>${fiberg-common.version}</version>
         </dependency>
 
     </dependencies>
